@@ -33,6 +33,7 @@ If the position of the shortest person is i, how many people would be in front o
    Hide Hint #2  
 Once you fix the position of the shortest person, what can you say about the position of the second shortest person?
 """
+# Time: O(n^2), space: O(n)
 class Solution:
     def reconstructQueue(self, people):
         n = len(people)
@@ -42,10 +43,15 @@ class Solution:
             height, pos = person
             count = pos
             for i in range(n):
-                if count == 0:
+                # we found pos k positions in total, that are empty slots or in these places
+                # stand persons with the height greater or equal than current
+                # height. Another condition is that current place is empty, so we can place this person there (else
+                # we would overwrite some person)
+                if count == 0 and queue[i] is None:
                     queue[i] = person
                     break
-                if queue[i] is not None:
+                # empty place or place where stands person with the height which is >= than the current one
+                if queue[i] is None or queue[i][0] >= height:
                     count -= 1
             
         return queue
