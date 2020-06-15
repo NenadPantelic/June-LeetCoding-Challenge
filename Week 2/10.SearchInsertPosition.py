@@ -31,11 +31,10 @@ Example 4:
 Input: [1,3,5,6], 0
 Output: 0
 """
-
-import bisect
+from bisect import bisect_left
 class Solution:
     def searchInsert(self, nums, target: int) -> int:
-        return bisect.bisect_left(nums, target)
+        return bisect_left(nums, target)
     
 sol  = Solution()
 
